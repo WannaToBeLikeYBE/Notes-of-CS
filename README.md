@@ -1,5 +1,5 @@
 # Notes-of-CS
-计划是今年学完Cpp+/*ita*/+微积分+线代+概率论+离散\n
+计划是今年学完Cpp）逃+/*ita*/+微积分+线代+概率论+离散\n
 好想去蹭数学系的课啊orz.\n
 emmmmmmm\n
 为了CS放弃了Dota+Rance10也是蛮拼的\n
