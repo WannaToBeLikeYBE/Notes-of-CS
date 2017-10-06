@@ -96,7 +96,7 @@ tips
       3.decltype类型指示符
             decltype选择并返回操作数的数据类型，编译器分析表达式并得到他的类型（包括顶层const和引用），却不实际计算表达式的值。
             eg.decltype(f()) sum = x;  //sum的类型为f()返回类型，但不会实际调用函数f。
-            **切记： 1.如果表达式的内容是解引用操作法a0。符。，则decltype将得到引用类型。
+            **切记： 1.如果表达式的内容是解引用操作符*p。，则decltype将得到引用类型。
                         eg.int i=0,*p=&i;
                            decltype(*p) c;  //error：c的类型为引用，必须初始化。
                     2.decltype((variable))的结果永远是引用。
