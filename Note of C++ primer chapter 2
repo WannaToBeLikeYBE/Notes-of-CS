@@ -79,7 +79,51 @@ tips
           constexpr int *q=nullptr;    //q是一个常量指针
       constexpr指针既可以指向常量也可以指向非常量。
       
-      
+ 2.5处理类型
+      1.类型别名
+          a.typedef double wages;  //wages是double的同义词
+          b.using wages = double;  //wages是double的同义词
+      *注：eg.typedef char *pstring;
+              const pstring ps;
+              此时ps为常量指针。
+              因为pstring为char*，const限定符此时修饰char*，所以ps为常量指针。
+      2.auto类型说明符
+            auto说明符能让编译器分析表达式所属的类型，auto定义的变量必须有初始值。
+            eg.auto item = 1+1.0;    //item类型为double
+            auto类型一般会忽略掉顶层const，保留底层const。
+      3.decltype类型指示符
+            decltype选择并返回操作数的数据类型，编译器分析表达式并得到他的类型（包括顶层const和引用），却不实际计算表达式的值。
+            eg.decltype(f()) sum = x;  //sum的类型为f()返回类型，但不会实际调用函数f。
+            **切记： 1.如果表达式的内容是解引用操作法a0。符。，则decltype将得到引用类型。
+                        eg.int i=0,*p=&i;
+                           decltype(*p) c;  //error：c的类型为引用，必须初始化。
+                    2.decltype((variable))的结果永远是引用。
+  
+  2.6自定义数据结构
+        预处理器概述：预处理器是在编译前执行的一段程序。
+        例如：预处理功能#include相当于在编译前将头文件复制到当前代码中。
+        以此为延伸，假如我在一个头文件a.h中定义了一个类，在另一个头文件b.h中需要用到这个类，那么我就需要在b.h中#include "a.h"。
+        而在主程序的实际需求中，我需要同时用到a.h和b.h这两个头文件，那么我需要同时
+        #include "a.h"
+        #include "b.h"
+        那么问题来了，第一次include相当于把a.h中对类的声明定义代码复制到主程序中，而第二次include又一次复制了一遍对于这个类的声明定义，
+            由此将会造成重复定义的bug。
+        为了避免这种情况，需要用到Cpp的一项预处理功能头文件保护符。
+        头文件保护符依赖于预处理变量，这种变量无视Cpp的作用域规则，其有两种状态：已定义和未定义。
+        我们用#define将一个名字定义为预处理变量，另外两个指令检测预处理变量的状态：#indef当变量已定义时为真，#ifndef当变量未定义时为真，
+            一旦检查结果为真，则执行后续操作直到遇到#endif指令为止。
+         现在，我们可以解决上面的问题了：
+         
+         对于头文件a.h，设置头文件保护符：
+         #ifndef A
+         #define A  //通常用大写字母表示预处理变量
+         Struct a{};
+         #endif
+         当头文件a.h被include时，无论其处在何位置，先将检测预处理变量A是否定义，如果没有将定义预处理变量A，当后续被include时，#ifndef A
+            将返回假，后续的include即复制操作将不会被执行，从而避免了被重定义。
+         
+         
+         **头文件保护符很简单，只要习惯性地加上即可，没有必要太在乎你的程序到底需不需要。
       
       
   
