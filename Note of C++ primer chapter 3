@@ -1,1 +1,33 @@
+第三章 字符串、向量和数组
+    string和vector是标准库基于对于数组的抽象提供的类型，前者支持可变长的字符串，后者则表示可变长的集合
+3.1命名空间的using声明
+    using namespace::name;
 
+3.2标准库类型string
+    1.定义和初始化
+      std::string i;默认为空串
+      std::string i="...";拷贝初始化
+      std::string i("...");直接初始化
+      std::string i(n,'char');把i初始化为n个char字符组成的串
+    2.string对象上的操作
+      （1）读写：一般通过cin（以空格为分隔）或getline(cin,line)（以换行符为分隔，结果不包含分隔符）读入。
+      （2）string的empty和size操作：empty和size是string的成员函数。string_name.empty()根据对象是否为空返回对应布尔值，
+              string_name.size()返回string对象的的长度。注意：返回类型为string::size_type，是一个unsigned类型数，要避免混用有无符号数。
+      （3）字面值和string对象相象：处于某些历史原因以及为了与C兼容，字符串字面值并不是标准库类型string的对象。
+              因此当要返回string时需要确保每个加法运算符两侧对象至少有一个是string对象。
+    3.处理string对象中的字符
+      （1）cctype头文件中的函数：对字符的判断，详见p82。
+      （2）处理字符：（1）使用基于范围的for语句
+                        for(declaration:expression)  //for(变量:序列)
+                            statement
+                        
+                        eg. std::string str("...")
+                            for(auto c:str)
+                        范围for循环将变量c与序列str联系起来，每次迭代str的下一个字符被拷贝到c。
+                        如果想要改变string对象中字符的值，需要把循环变量定义成引用类型。
+                        eg.for(auto &c:str)
+                              c=toupper(c);//大写字符
+                     （2）使用下标运算符[]
+                         *当使用下表运算符时需要注意范围。
+                         推荐使用string::size_type，可以确保下标不会小于0，注意检查下标的合法性。
+                    
