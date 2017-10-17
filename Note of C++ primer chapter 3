@@ -4,7 +4,7 @@
     using namespace::name;
 
 3.2标准库类型string
-    1.定义和初始化
+    1.定义和初始化 
       std::string i;默认为空串
       std::string i="...";拷贝初始化
       std::string i("...");直接初始化
