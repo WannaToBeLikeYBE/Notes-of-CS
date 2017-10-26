@@ -1,1 +1,60 @@
+第五章 语句
+1.简单语句
+2.语句作用域
+略
+3.条件语句
+    switch语句：
+    switch语句提供了一条便利的途径使得我们能够在若干固定的选项中做出选择。
+    eg.switch(expr){
+          case 1:expr;break;
+          case 2:expr;break;
+          case 3:expr;break;...
+          default:expr;break;}
+    switch语句先对括号里的表达式求值，其可以是一个初始化的变量声明，表达式的值转化为整数类型。
+    如果表达式和某个case标签的值匹配成功，则程序从后一条语句开始执行，直到switch结尾或遇到break语句。
+    其中case标签必须是整型常量表达式。advice:一般不要省略case分支最后的break语句，如果逻辑如此，最好加一段注释说明
+    default标签:
+    如果没有一个case标签能匹配上switch表达式的值，程序将执行紧跟在default标签后面的语句。
+4.迭代语句
+    do while语句:（注意while结束后的分号）
+    do{
+        statement}
+    while(condition);
+    在do语句中，求condition的值之前首先执行一次statement，condition不能为空。condition为false，循环结束。
+    注：condition使用的变量必须定义在循环体之外。
 
+5.跳转语句
+    1.break语句：break语句负责终止离它最近的while、do while、for或switch语句，并从语句之后的下一条开始执行。
+    2.continue语句：continue语句终止最近的循环中的当前迭代并立即开始下一次迭代。
+    3.goto语句:  goto label;
+        其中label是一种特殊的语句，在它之前有一个标识符以及一个冒号:
+        eg.goto end;
+           .....;
+           end:cout<<"gg";
+        advise:不要在程序中使用goto语句，因为它使得程序既难理解又难修改。
+    4.异常处理：（在真实的程序中，应该把对象处理的代码和用户交互的代码分离开来。）
+        throw表达式：throw引发异常。
+        try语句块：异常处理部分使用try语句处理异常。try语句块以关键词try开始，并以一个或多个catch子句结束
+                  因为catch子句处理异常，所以它们也被称为异常处理代码。
+        一套异常类：用于在throw表达式和相关的catch子句之间传递异常的具体信息。
+                   标准异常：<stdexcept>定义的异常类，eg.runtime_error,range_error等，见书p176。
+        
+        eg.int main()
+{
+	int a, b;
+	while (std::cin >> a >> b)
+	{
+		try {
+			if (b == 0)
+				throw std::runtime_error("b cannot be zero");
+			std::cout << a / b;
+		}
+		catch (std::runtime_error)
+		{
+			std::cout << "Try Again? Y or N ";
+			char c; std::cin >> c;
+			if (!std::cin || c == 'N')
+				break;
+		}
+	}
+}
