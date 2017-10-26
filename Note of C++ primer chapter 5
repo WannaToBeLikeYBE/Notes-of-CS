@@ -27,7 +27,7 @@
     1.break语句：break语句负责终止离它最近的while、do while、for或switch语句，并从语句之后的下一条开始执行。
     2.continue语句：continue语句终止最近的循环中的当前迭代并立即开始下一次迭代。
     3.goto语句:  goto label;
-        其中label是一种特殊的语句，在它之前有一个标识符以及一个冒号:
+        其中label是一种特殊的语句，在它之前有一个标识符以及一个冒号,对于同一个标识符，用作标签的同时还能用作其他目的，彼此互不干扰。
         eg.goto end;
            .....;
            end:cout<<"gg";
